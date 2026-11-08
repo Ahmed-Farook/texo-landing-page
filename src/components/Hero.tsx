@@ -78,19 +78,19 @@ export const Hero: React.FC<HeroProps> = ({ onPlatformSelect }) => {
         </div>
 
         {/* Main Headline */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[#263950] dark:text-[#E8EEF3] leading-[1.08]">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#263950] dark:text-[#E8EEF3] leading-[1.08]">
           One less thing <br />
           <span className="text-[#4C627E] dark:text-[#7EAAD0]">to keep in your head.</span>
         </h1>
 
         {/* Subtitle */}
-        <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
+        <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
           The calm, distraction-free note app crafted for clarity. 0ms local speed,
           zero-knowledge encryption, and thoughtful Kyoto aesthetics across every device.
         </p>
 
         {/* CTA Buttons */}
-        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-xs sm:max-w-none mx-auto">
           {/* Smart Detected Download Button */}
           <a
             href={primary.url}
@@ -157,7 +157,7 @@ export const Hero: React.FC<HeroProps> = ({ onPlatformSelect }) => {
         </div>
 
         {/* Value Proposition Micro-badges */}
-        <div className="pt-6 border-t border-[#E6E0D5]/80 dark:border-[#223344] max-w-xl mx-auto flex items-center justify-around text-xs text-[#6E7E8E] dark:text-[#8AA0B4]">
+        <div className="pt-6 border-t border-[#E6E0D5]/80 dark:border-[#223344] max-w-xl mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-[#6E7E8E] dark:text-[#8AA0B4]">
           <div className="flex items-center space-x-1.5">
             <Zap size={14} className="text-amber-500" />
             <span>0ms Local Speed</span>

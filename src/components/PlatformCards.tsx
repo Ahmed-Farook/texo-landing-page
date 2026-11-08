@@ -65,12 +65,12 @@ export const PlatformCards: React.FC<PlatformCardsProps> = ({ id = 'platforms' }
   ];
 
   return (
-    <section id={id} className="py-20 sm:py-28 max-w-6xl mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16">
+    <section id={id} className="py-14 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 space-y-8 sm:space-y-16">
       <div className="max-w-2xl mx-auto text-center space-y-3">
         <div className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-[#4C627E] dark:text-[#7EAAD0] bg-[#EAE2D2]/80 dark:bg-[#1C2733]">
           Universal Access
         </div>
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#263950] dark:text-[#E8EEF3]">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#263950] dark:text-[#E8EEF3]">
           Download for your device.
         </h2>
         <p className="text-sm sm:text-base text-[#4C627E] dark:text-[#8AA0B4]">
@@ -79,13 +79,13 @@ export const PlatformCards: React.FC<PlatformCardsProps> = ({ id = 'platforms' }
       </div>
 
       {/* 4 Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {platforms.map((p) => {
           const Icon = p.icon;
           return (
             <div
               key={p.name}
-              className={`p-6 rounded-3xl border flex flex-col justify-between transition-all hover:shadow-soft ${
+              className={`p-5 sm:p-6 rounded-2xl sm:rounded-3xl border flex flex-col justify-between transition-all hover:shadow-soft ${
                 p.primary
                   ? 'bg-[#FAF6EF] dark:bg-[#1C2733] border-[#263950]/30 dark:border-[#7EAAD0]/40 shadow-xs'
                   : 'bg-[#FAF6EF]/60 dark:bg-[#16202A] border-[#E6E0D5] dark:border-[#223344]'

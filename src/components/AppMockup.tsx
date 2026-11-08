@@ -25,8 +25,11 @@ import {
 } from 'lucide-react';
 
 export const AppMockup: React.FC = () => {
-  // Independent mockup theme state (isolated from website theme)
+  // Independent mockup theme state (strictly decoupled from website theme)
   const [isMockupDark, setIsMockupDark] = useState<boolean>(false);
+
+  // Mobile view tab: on small screens, users can flip between Note list and Editor
+  const [mobileTab, setMobileTab] = useState<'editor' | 'list'>('editor');
 
   // Interactive checklist state
   const [checklist, setChecklist] = useState([
@@ -56,11 +59,64 @@ export const AppMockup: React.FC = () => {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-20 sm:pb-32">
+    <section className="max-w-6xl mx-auto px-3 sm:px-6 pb-16 sm:pb-32">
       <div className="relative">
-        {/* Floating Mockup Window Container - strictly controlled by isMockupDark, NOT global dark mode */}
+        {/* Floating Arrow Callout: Points to Dark/Light Mode Switcher */}
+        <div className="hidden sm:flex items-center space-x-2 absolute -top-12 right-2 sm:right-6 pointer-events-none select-none z-30">
+          <span
+            className={`text-xs font-semibold tracking-tight transition-colors ${
+              isMockupDark ? 'text-[#7EAAD0]' : 'text-[#263950]'
+            }`}
+          >
+            Try switching themes!
+          </span>
+          {/* Hand-drawn style curved arrow swooping down to theme toggle */}
+          <svg
+            width="38"
+            height="32"
+            viewBox="0 0 38 32"
+            fill="none"
+            className={`transition-colors ${isMockupDark ? 'text-[#7EAAD0]' : 'text-[#263950]'}`}
+            aria-hidden="true"
+          >
+            <path
+              d="M4 4 C18 4 33 8 31 25"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M24 20 C27 23 30 26 31 26 C32 23 35 20 37 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+
+        {/* Mobile Callout Bar (visible only on mobile) */}
+        <div className="flex sm:hidden items-center justify-between px-1 pb-2.5 text-xs select-none">
+          <div className="flex items-center space-x-1 font-semibold text-[#D4A359] dark:text-[#7EAAD0]">
+            <span>Interactive Kyoto App</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsMockupDark(!isMockupDark)}
+            className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border transition-all shadow-2xs ${
+              isMockupDark
+                ? 'bg-[#1C2733] border-[#2A3E52] text-[#7EAAD0]'
+                : 'bg-[#FAF6EF] border-[#DFD3C0] text-[#263950]'
+            }`}
+          >
+            {isMockupDark ? <Sun size={12} className="text-amber-400" /> : <Moon size={12} />}
+            <span>{isMockupDark ? 'Switch to Light' : 'Switch to Dark'}</span>
+          </button>
+        </div>
+
+        {/* Floating Mockup Window Container - strictly conditioned on isMockupDark, NOT global dark mode */}
         <div
-          className={`rounded-2xl sm:rounded-3xl border shadow-2xl overflow-hidden transition-colors duration-300 ${
+          className={`rounded-2xl sm:rounded-3xl border shadow-xl sm:shadow-2xl overflow-hidden transition-colors duration-300 ${
             isMockupDark
               ? 'bg-[#121B24] border-[#223344] text-[#E8EEF3]'
               : 'bg-[#FAF5EF] border-[#DFD3C0] text-[#1C2B36]'
@@ -68,23 +124,23 @@ export const AppMockup: React.FC = () => {
         >
           {/* Top Titlebar */}
           <div
-            className={`h-11 px-3.5 border-b flex items-center justify-between transition-colors select-none ${
+            className={`h-11 px-3 sm:px-3.5 border-b flex items-center justify-between transition-colors select-none ${
               isMockupDark
                 ? 'bg-[#151E28] border-[#223344]'
                 : 'bg-[#F3EDE1] border-[#DFD3C0]'
             }`}
           >
-            {/* Left Controls: Traffic lights + Sidebar & View toggles */}
-            <div className="flex items-center space-x-3">
+            {/* Left Controls: Traffic lights + Sidebar/View or Mobile Tabs */}
+            <div className="flex items-center space-x-2 sm:space-x-3">
               {/* macOS Traffic Lights */}
-              <div className="flex items-center space-x-2">
-                <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
-                <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
-                <span className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
               </div>
 
-              {/* Sidebar toggle button */}
-              <div className="flex items-center space-x-1.5 pl-1">
+              {/* Desktop Sidebar & View Mode Toggles */}
+              <div className="hidden sm:flex items-center space-x-1.5 pl-1">
                 <button
                   type="button"
                   title="Toggle sidebar"
@@ -97,7 +153,6 @@ export const AppMockup: React.FC = () => {
                   <PanelLeft size={14} />
                 </button>
 
-                {/* View Mode Segment */}
                 <div
                   className={`flex items-center p-0.5 rounded-md border text-xs ${
                     isMockupDark
@@ -123,15 +178,55 @@ export const AppMockup: React.FC = () => {
                   </button>
                 </div>
               </div>
+
+              {/* Mobile View Tab Switcher (Notes vs Editor) */}
+              <div
+                className={`flex sm:hidden items-center p-0.5 rounded-md border text-[11px] font-medium ${
+                  isMockupDark
+                    ? 'border-[#263747] bg-[#101822]'
+                    : 'border-[#DFD3C0] bg-[#FAF5EF]'
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setMobileTab('editor')}
+                  className={`px-2 py-0.5 rounded transition-colors ${
+                    mobileTab === 'editor'
+                      ? isMockupDark
+                        ? 'bg-[#253D56] text-white shadow-2xs'
+                        : 'bg-[#213A50] text-white shadow-2xs'
+                      : isMockupDark
+                        ? 'text-[#8AA0B4]'
+                        : 'text-[#4C627E]'
+                  }`}
+                >
+                  Editor
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileTab('list')}
+                  className={`px-2 py-0.5 rounded transition-colors ${
+                    mobileTab === 'list'
+                      ? isMockupDark
+                        ? 'bg-[#253D56] text-white shadow-2xs'
+                        : 'bg-[#213A50] text-white shadow-2xs'
+                      : isMockupDark
+                        ? 'text-[#8AA0B4]'
+                        : 'text-[#4C627E]'
+                  }`}
+                >
+                  Notes (1)
+                </button>
+              </div>
             </div>
 
             {/* Center: Brand Glyph + "texō" */}
-            <div className="flex items-center space-x-2">
-              <div className="w-5 h-5 rounded-full flex items-center justify-center">
+            <div className="flex items-center space-x-1.5 sm:space-x-2">
+              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center">
                 <img
                   src={isMockupDark ? '/texo-logo-light.png' : '/texo-logo.png'}
                   alt="texō"
-                  className="w-4 h-4 object-contain"
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain"
                 />
               </div>
               <span
@@ -144,11 +239,11 @@ export const AppMockup: React.FC = () => {
             </div>
 
             {/* Right Controls: Updates tray, Cloud sync, Theme icon (WORKS), New Note button */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1.5 sm:space-x-2">
               <button
                 type="button"
                 title="Software Updates"
-                className={`p-1 rounded hover:opacity-80 transition-opacity ${
+                className={`hidden sm:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
                   isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                 }`}
               >
@@ -158,7 +253,7 @@ export const AppMockup: React.FC = () => {
               <button
                 type="button"
                 title="Cloud Sync"
-                className={`p-1 rounded hover:opacity-80 transition-opacity ${
+                className={`hidden sm:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
                   isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                 }`}
               >
@@ -170,34 +265,34 @@ export const AppMockup: React.FC = () => {
                 type="button"
                 onClick={() => setIsMockupDark(!isMockupDark)}
                 title={isMockupDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                className={`p-1 rounded transition-transform active:scale-90 ${
+                className={`p-1.5 rounded-lg border transition-all active:scale-90 ${
                   isMockupDark
-                    ? 'text-amber-400 hover:text-amber-300'
-                    : 'text-[#213A50] hover:text-[#172A3C]'
+                    ? 'border-[#263747] bg-[#1C2733] text-amber-400 hover:text-amber-300'
+                    : 'border-[#DFD3C0] bg-[#FAF5EF] text-[#213A50] hover:text-[#172A3C]'
                 }`}
               >
-                {isMockupDark ? <Sun size={15} /> : <Moon size={15} />}
+                {isMockupDark ? <Sun size={14} /> : <Moon size={14} />}
               </button>
 
               {/* New Note Button */}
               <button
                 type="button"
                 title="New Note"
-                className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-semibold text-white shadow-xs transition-opacity ${
+                className={`inline-flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1 rounded-md text-xs font-semibold text-white shadow-xs transition-opacity ${
                   isMockupDark
                     ? 'bg-[#2A3E56] hover:bg-[#344D6A]'
                     : 'bg-[#213A50] hover:bg-[#1B2C40]'
                 }`}
               >
                 <SquarePen size={13} />
-                <span className="hidden sm:inline">New Note</span>
+                <span className="hidden md:inline">New Note</span>
               </button>
             </div>
           </div>
 
           {/* Three-pane App Body */}
-          <div className="grid grid-cols-12 min-h-[490px] sm:min-h-[550px]">
-            {/* Pane 1: Left Sidebar (Folders) */}
+          <div className="grid grid-cols-12 min-h-[460px] sm:min-h-[540px]">
+            {/* Pane 1: Left Sidebar (Desktop only) */}
             <div
               className={`hidden md:flex md:col-span-3 flex-col justify-between p-3 border-r transition-colors select-none text-xs ${
                 isMockupDark
@@ -330,13 +425,15 @@ export const AppMockup: React.FC = () => {
                 </div>
               </div>
 
-              {/* Sidebar bottom empty spacing (matches screenshots without footer) */}
               <div />
             </div>
 
             {/* Pane 2: Middle Pane (Notes List - ONLY ONE NOTE) */}
+            {/* On mobile: displayed only when mobileTab === 'list'; on sm+: always displayed */}
             <div
-              className={`col-span-12 sm:col-span-5 md:col-span-4 border-r flex flex-col transition-colors select-none ${
+              className={`${
+                mobileTab === 'list' ? 'col-span-12 flex' : 'hidden'
+              } sm:flex sm:col-span-5 md:col-span-4 border-r flex-col transition-colors select-none ${
                 isMockupDark
                   ? 'bg-[#16202A] border-[#223344]'
                   : 'bg-[#F6EFE4] border-[#DFD3C0]'
@@ -397,7 +494,8 @@ export const AppMockup: React.FC = () => {
 
                 {/* The single pinned note card */}
                 <div
-                  className={`p-3 rounded-xl border text-white shadow-xs cursor-default ${
+                  onClick={() => setMobileTab('editor')}
+                  className={`p-3 rounded-xl border text-white shadow-xs cursor-pointer transition-transform active:scale-[0.99] ${
                     isMockupDark
                       ? 'bg-[#233853] border-[#2F4A6E]'
                       : 'bg-[#213A50] border-[#1B2F42]'
@@ -417,14 +515,17 @@ export const AppMockup: React.FC = () => {
             </div>
 
             {/* Pane 3: Right Editor Pane */}
+            {/* On mobile: displayed when mobileTab === 'editor'; on sm+: always displayed */}
             <div
-              className={`col-span-12 sm:col-span-7 md:col-span-5 flex flex-col justify-between transition-colors overflow-hidden ${
+              className={`${
+                mobileTab === 'editor' ? 'col-span-12 flex' : 'hidden'
+              } sm:flex sm:col-span-7 md:col-span-5 flex-col justify-between transition-colors overflow-hidden ${
                 isMockupDark ? 'bg-[#121B24]' : 'bg-[#FAF5EF]'
               }`}
             >
               {/* Secondary Editor Formatting Toolbar */}
               <div
-                className={`px-3 py-1.5 border-b flex items-center space-x-1.5 text-xs select-none sticky top-0 z-10 overflow-x-auto ${
+                className={`px-3 py-1.5 border-b flex items-center space-x-1.5 text-xs select-none sticky top-0 z-10 overflow-x-auto no-scrollbar touch-pan-x whitespace-nowrap ${
                   isMockupDark
                     ? 'bg-[#151E28] border-[#223344]'
                     : 'bg-[#F3EDE1] border-[#DFD3C0]'
@@ -432,21 +533,21 @@ export const AppMockup: React.FC = () => {
               >
                 {/* Headings */}
                 <span
-                  className={`font-semibold text-[11px] px-1 ${
+                  className={`font-semibold text-[11px] px-1 shrink-0 ${
                     isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
                   H1
                 </span>
                 <span
-                  className={`font-semibold text-[11px] px-1 ${
+                  className={`font-semibold text-[11px] px-1 shrink-0 ${
                     isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
                   H2
                 </span>
                 <span
-                  className={`font-semibold text-[11px] px-1 ${
+                  className={`font-semibold text-[11px] px-1 shrink-0 ${
                     isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
@@ -454,19 +555,21 @@ export const AppMockup: React.FC = () => {
                 </span>
 
                 <div
-                  className={`h-3 w-px mx-1 ${isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'}`}
+                  className={`h-3 w-px mx-1 shrink-0 ${
+                    isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
+                  }`}
                 />
 
                 {/* Text Styles */}
                 <span
-                  className={`font-bold text-[11px] px-1 ${
+                  className={`font-bold text-[11px] px-1 shrink-0 ${
                     isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
                   B
                 </span>
                 <span
-                  className={`italic font-serif text-[11px] px-1 ${
+                  className={`italic font-serif text-[11px] px-1 shrink-0 ${
                     isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
@@ -474,17 +577,17 @@ export const AppMockup: React.FC = () => {
                 </span>
                 <Underline
                   size={13}
-                  className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
                 />
                 <span
-                  className={`line-through text-[11px] px-1 ${
+                  className={`line-through text-[11px] px-1 shrink-0 ${
                     isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
                   S
                 </span>
                 <span
-                  className={`font-mono text-[11px] px-1 ${
+                  className={`font-mono text-[11px] px-1 shrink-0 ${
                     isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
@@ -492,27 +595,34 @@ export const AppMockup: React.FC = () => {
                 </span>
 
                 <div
-                  className={`h-3 w-px mx-1 ${isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'}`}
+                  className={`h-3 w-px mx-1 shrink-0 ${
+                    isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
+                  }`}
                 />
 
                 {/* Lists */}
                 <ListTodo
                   size={13}
-                  className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
                 />
-                <List size={13} className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'} />
+                <List
+                  size={13}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                />
                 <ListOrdered
                   size={13}
-                  className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
                 />
 
                 <div
-                  className={`h-3 w-px mx-1 ${isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'}`}
+                  className={`h-3 w-px mx-1 shrink-0 ${
+                    isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
+                  }`}
                 />
 
-                {/* Active Quote Highlight Button */}
+                {/* Active Quote Button */}
                 <div
-                  className={`p-1 rounded text-xs ${
+                  className={`p-1 rounded text-xs shrink-0 ${
                     isMockupDark
                       ? 'bg-[#203448] text-[#7EAAD0]'
                       : 'bg-[#E5DCCB] text-[#213A50]'
@@ -520,23 +630,37 @@ export const AppMockup: React.FC = () => {
                 >
                   <Quote size={12} />
                 </div>
-                <Code size={13} className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'} />
-                <Minus size={13} className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'} />
-
-                <div
-                  className={`h-3 w-px mx-1 ${isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'}`}
+                <Code
+                  size={13}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                />
+                <Minus
+                  size={13}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
                 />
 
-                <Undo2 size={13} className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'} />
-                <Redo2 size={13} className={isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'} />
+                <div
+                  className={`h-3 w-px mx-1 shrink-0 ${
+                    isMockupDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
+                  }`}
+                />
+
+                <Undo2
+                  size={13}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                />
+                <Redo2
+                  size={13}
+                  className={`shrink-0 ${isMockupDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                />
               </div>
 
               {/* Note Content Area */}
-              <div className="p-5 sm:p-7 space-y-4 overflow-y-auto">
+              <div className="p-4 sm:p-7 space-y-3.5 sm:space-y-4 overflow-y-auto">
                 {/* Centered Date header */}
-                <div className="text-center pt-1 pb-2">
+                <div className="text-center pt-0.5 pb-1">
                   <span
-                    className={`text-[11px] font-medium ${
+                    className={`text-[10px] sm:text-[11px] font-medium ${
                       isMockupDark ? 'text-[#6E8092]' : 'text-[#8A9BA8]'
                     }`}
                   >
@@ -546,7 +670,7 @@ export const AppMockup: React.FC = () => {
 
                 {/* Title */}
                 <h1
-                  className={`text-2xl sm:text-3xl font-bold tracking-tight ${
+                  className={`text-xl sm:text-2xl md:text-3xl font-bold tracking-tight ${
                     isMockupDark ? 'text-[#E8EEF3]' : 'text-[#1C2B36]'
                   }`}
                 >
@@ -580,16 +704,53 @@ export const AppMockup: React.FC = () => {
                   .
                 </p>
 
-                {/* Subtitle with Sparkles */}
-                <h3
-                  className={`text-sm font-bold pt-1 ${
-                    isMockupDark ? 'text-[#E8EEF3]' : 'text-[#1C2B36]'
-                  }`}
-                >
-                  ✨ A few things to try:
-                </h3>
+                {/* Subtitle with Sparkles & Hand-Drawn Arrow Callout */}
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                  <h3
+                    className={`text-xs sm:text-sm font-bold ${
+                      isMockupDark ? 'text-[#E8EEF3]' : 'text-[#1C2B36]'
+                    }`}
+                  >
+                    ✨ A few things to try:
+                  </h3>
 
-                {/* Interactive Checklists (FUNCTIONAL) */}
+                  {/* Sketched Hand-Drawn Arrow pointing to Checkboxes */}
+                  <div className="inline-flex items-center space-x-1.5 select-none animate-in fade-in duration-300">
+                    <svg
+                      width="34"
+                      height="20"
+                      viewBox="0 0 34 20"
+                      fill="none"
+                      className={`transition-colors shrink-0 ${
+                        isMockupDark ? 'text-[#7EAAD0]' : 'text-[#263950]'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M8 2 C5 6 2 8 1 9 C4 11 8 14 11 17"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M2 9 C12 6 22 6 32 15"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <span
+                      className={`text-[11px] sm:text-xs font-semibold tracking-tight ${
+                        isMockupDark ? 'text-[#7EAAD0]' : 'text-[#263950]'
+                      }`}
+                    >
+                      Click to check off!
+                    </span>
+                  </div>
+                </div>
+
+                {/* Interactive Checklists (FIXED: shrink-0 and aspect-square prevent oval distortion) */}
                 <div className="space-y-2.5 pt-0.5 select-none">
                   {checklist.map((item) => (
                     <div
@@ -597,9 +758,9 @@ export const AppMockup: React.FC = () => {
                       onClick={() => toggleCheck(item.id)}
                       className="flex items-start space-x-2.5 text-xs sm:text-sm cursor-pointer group"
                     >
-                      {/* Checkbox circle */}
+                      {/* Checkbox circle: STRICTLY GUARANTEED to be a perfect 16px circle */}
                       <div
-                        className={`w-4 h-4 rounded-full mt-0.5 flex items-center justify-center transition-all ${
+                        className={`shrink-0 w-4 h-4 rounded-full aspect-square mt-0.5 flex items-center justify-center transition-all ${
                           item.checked
                             ? isMockupDark
                               ? 'bg-[#2E4B6E] text-white border border-[#2E4B6E]'
@@ -608,13 +769,14 @@ export const AppMockup: React.FC = () => {
                               ? 'border border-[#4C627E] bg-transparent'
                               : 'border border-[#9AA9B5] bg-transparent'
                         }`}
+                        style={{ minWidth: '16px', minHeight: '16px', width: '16px', height: '16px' }}
                       >
-                        {item.checked && <Check size={10} strokeWidth={3} />}
+                        {item.checked && <Check size={10} strokeWidth={3} className="shrink-0" />}
                       </div>
 
                       {/* Checkbox label */}
                       <div
-                        className={`leading-relaxed transition-colors ${
+                        className={`leading-relaxed transition-colors flex-1 ${
                           item.checked
                             ? isMockupDark
                               ? 'line-through text-[#6E8092]'
@@ -658,7 +820,7 @@ export const AppMockup: React.FC = () => {
 
                 {/* Blockquote with vertical line */}
                 <div
-                  className={`border-l-[3px] pl-3.5 my-6 italic text-xs sm:text-sm ${
+                  className={`border-l-[3px] pl-3 sm:pl-3.5 my-4 sm:my-6 italic text-xs sm:text-sm leading-relaxed ${
                     isMockupDark
                       ? 'border-[#3F586E] text-[#8AA0B4]'
                       : 'border-[#213A50] text-[#4C627E]'
@@ -669,8 +831,8 @@ export const AppMockup: React.FC = () => {
                 </div>
               </div>
 
-              {/* Bottom empty spacing to match screenshot */}
-              <div className="pb-4" />
+              {/* Bottom spacing */}
+              <div className="pb-3" />
             </div>
           </div>
         </div>

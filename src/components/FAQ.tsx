@@ -47,12 +47,12 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-28 max-w-4xl mx-auto px-4 sm:px-6 space-y-10">
+    <section id="faq" className="py-14 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 space-y-8 sm:space-y-10">
       <div className="text-center space-y-3">
         <div className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-[#4C627E] dark:text-[#7EAAD0] bg-[#EAE2D2]/80 dark:bg-[#1C2733]">
           Got questions?
         </div>
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#263950] dark:text-[#E8EEF3]">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#263950] dark:text-[#E8EEF3]">
           Frequently Asked Questions
         </h2>
       </div>
@@ -63,7 +63,7 @@ export const FAQ: React.FC = () => {
           return (
             <div
               key={idx}
-              className="rounded-2xl border border-[#E6E0D5] dark:border-[#223344] bg-[#FAF6EF] dark:bg-[#1C2733] overflow-hidden transition-colors"
+              className="rounded-xl sm:rounded-2xl border border-[#E6E0D5] dark:border-[#223344] bg-[#FAF6EF] dark:bg-[#1C2733] overflow-hidden transition-colors"
             >
               <button
                 onClick={() => toggle(idx)}
