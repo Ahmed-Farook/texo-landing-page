@@ -67,16 +67,16 @@ export const Features: React.FC = () => {
             </p>
           </div>
 
-          {/* Bento Card 3: Kyoto Aesthetics */}
+          {/* Bento Card 3: Parchment & Indigo Palette */}
           <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
               <Palette size={22} />
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-[#263950] dark:text-[#E8EEF3]">
-              Kyoto Palette
+              Parchment &amp; Indigo
             </h3>
             <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
-              Warm Japanese parchment (<code className="font-mono text-xs">#F5F0E6</code>) and deep
+              Warm parchment (<code className="font-mono text-xs">#F5F0E6</code>) and deep
               indigo (<code className="font-mono text-xs">#263950</code>) crafted to minimize glare
               and eye strain during marathon writing sessions.
             </p>

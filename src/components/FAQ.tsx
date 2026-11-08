@@ -23,9 +23,14 @@ const faqs: FAQItem[] = [
       'When you sign in, your device derives an encryption key from your password using PBKDF2 with SHA-256 and unique salt. Every note title and body is encrypted with AES-GCM before leaving your device. Nobody—including server hosts—can decrypt your notes.',
   },
   {
-    question: 'Why does macOS say the app is damaged on first launch?',
+    question: 'What should I do if macOS says the app is damaged or from an unidentified developer?',
     answer:
-      'Apple displays this standard security warning for unnotarized open-source applications built by community developers without a paid annual Apple Developer license. To grant permission, open Terminal and run: xattr -cr "/Applications/texō.app".',
+      'Apple displays this standard security warning (Gatekeeper) for open-source applications built by community developers who do not hold a paid annual Apple Developer license.\n\nTo open texō on macOS:\n• Method 1 (Quick): Right-click (or Control-click) texō in your Applications folder and select "Open", then confirm by clicking "Open" in the dialog.\n• Method 2 (Terminal): If macOS displays "texō is damaged and cannot be opened", open the Terminal app and run:\nxattr -cr /Applications/texō.app\nPress Enter, and the app will open immediately.',
+  },
+  {
+    question: 'What should I do if Windows SmartScreen warns that the app is unrecognized or not safe?',
+    answer:
+      'Microsoft Defender SmartScreen displays a blue banner ("Windows protected your PC") on freshly published open-source releases that have not yet built up commercial download reputation.\n\nTo open texō on Windows:\n1. Click the "More info" link on the warning banner.\n2. Click the "Run anyway" button that appears at the bottom right.\n\ntexō is 100% open source under the MIT license, completely free of telemetry, tracking, or ads. You can inspect every line of source code on GitHub.',
   },
   {
     question: 'How do in-app updates work?',
@@ -33,9 +38,9 @@ const faqs: FAQItem[] = [
       'texō includes an automated updater that queries GitHub Releases. When an update is ready, clicking "Update Now" downloads and installs the new version in-place on macOS, Windows, and Android without manual file downloads.',
   },
   {
-    question: 'What inspired the Kyoto color theme?',
+    question: 'What inspired the parchment and deep indigo design?',
     answer:
-      'texō is styled with warm Japanese parchment (#F5F0E6) and deep Kyoto indigo (#263950). Traditional pure white (#FFFFFF) causes retinal glare and eye fatigue over long writing sessions; Kyoto colors provide a calm, tactile reading environment.',
+      'texō is styled with warm parchment (#F5F0E6) and deep indigo (#263950). Traditional pure white (#FFFFFF) causes retinal glare and eye fatigue over long writing sessions. Soft parchment tones provide a calm, tactile reading environment reminiscent of physical notebook paper, while maintaining crisp contrast.',
   },
 ];
 
@@ -78,7 +83,7 @@ export const FAQ: React.FC = () => {
                 />
               </button>
               {isOpen && (
-                <div className="px-4 sm:px-5 pb-5 text-xs sm:text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed border-t border-[#E6E0D5]/60 dark:border-[#223344] pt-3">
+                <div className="px-4 sm:px-5 pb-5 text-xs sm:text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed border-t border-[#E6E0D5]/60 dark:border-[#223344] pt-3 whitespace-pre-line font-normal">
                   {faq.answer}
                 </div>
               )}

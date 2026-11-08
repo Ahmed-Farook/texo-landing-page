@@ -86,7 +86,7 @@ export const Hero: React.FC<HeroProps> = ({ onPlatformSelect }) => {
         {/* Subtitle */}
         <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
           The calm, distraction-free note app crafted for clarity. 0ms local speed,
-          zero-knowledge encryption, and thoughtful Kyoto aesthetics across every device.
+          zero-knowledge encryption, and thoughtful parchment and indigo aesthetics across every device.
         </p>
 
         {/* CTA Buttons */}

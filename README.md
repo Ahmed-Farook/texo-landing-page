@@ -2,7 +2,7 @@
 
 The official marketing and download website for **texō** — the calm, distraction-free cross-platform note-taking app.
 
-Built with **React 18**, **Vite**, **Tailwind CSS**, and **TypeScript**. Styled in the **Kyoto palette** (parchment `#F5F0E6` and deep indigo `#263950`).
+Built with **React 18**, **Vite**, **Tailwind CSS**, and **TypeScript**. Styled with warm parchment (`#F5F0E6`) and deep indigo (`#263950`).
 
 ---
 
@@ -58,9 +58,9 @@ npm run preview
 ## 📦 Features Highlighted
 
 - **Hero with Auto-OS Detection**: Direct download button dynamically shows macOS (`.dmg`), Windows (`.exe`), or Android (`.apk`) based on user agent.
-- **Interactive Kyoto Mockup**: Live 3-pane preview with clickable checklist items and light/dark Kyoto theme switch.
+- **Interactive App Mockup**: Live 3-pane preview with clickable checklist items and real-time site theme synchronization.
 - **Bento Grid**: 0ms local speed, end-to-end encryption, distraction-free typography, and trash recovery.
 - **Download Hub**: Clean cards for macOS, Windows, Android, and Web with direct links to GitHub Releases.
 - **Security Breakdown**: Client-side AES-GCM and zero-telemetry architecture.
-- **FAQ Accordion**: Common questions, including macOS Gatekeeper terminal tip.
+- **FAQ Accordion**: Common questions, including macOS Gatekeeper and Windows SmartScreen security tips.
 

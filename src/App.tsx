@@ -43,7 +43,7 @@ export const App: React.FC = () => {
 
       <main className="flex-1">
         <Hero onPlatformSelect={() => scrollToPlatforms('platforms')} />
-        <AppMockup />
+        <AppMockup isDark={isDark} />
         <Features />
         <PlatformCards id="platforms" />
         <SecuritySection />
