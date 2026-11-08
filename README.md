@@ -58,6 +58,7 @@ npm run preview
 ## 📦 Features Highlighted
 
 - **Hero with Auto-OS Detection**: Direct download button dynamically shows macOS (`.dmg`), Windows (`.exe`), or Android (`.apk`) based on user agent.
+- **Dynamic GitHub Releases**: Real-time integration with GitHub API ensuring download buttons and version badges automatically point to the latest release assets with zero manual updates needed.
 - **Interactive App Mockup**: Live 3-pane preview with clickable checklist items and real-time site theme synchronization.
 - **Bento Grid**: 0ms local speed, end-to-end encryption, distraction-free typography, and trash recovery.
 - **Download Hub**: Clean cards for macOS, Windows, Android, and Web with direct links to GitHub Releases.

@@ -7,14 +7,14 @@ import {
   Download,
   ExternalLink,
 } from 'lucide-react';
-import { getDownloadLinks } from '../utils/releaseLinks';
+import { useLatestRelease } from '../utils/releaseLinks';
 
 interface PlatformCardsProps {
   id?: string;
 }
 
 export const PlatformCards: React.FC<PlatformCardsProps> = ({ id = 'platforms' }) => {
-  const links = getDownloadLinks();
+  const links = useLatestRelease();
 
   const platforms = [
     {
@@ -102,9 +102,14 @@ export const PlatformCards: React.FC<PlatformCardsProps> = ({ id = 'platforms' }
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-bold text-[#263950] dark:text-[#E8EEF3]">
-                    {p.name}
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-[#263950] dark:text-[#E8EEF3]">
+                      {p.name}
+                    </h3>
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#263950]/10 dark:bg-[#7EAAD0]/20 text-[#263950] dark:text-[#7EAAD0] font-medium">
+                      {p.isWeb ? 'Cloud' : links.version}
+                    </span>
+                  </div>
                   <p className="text-xs text-[#5A718C] dark:text-[#8AA0B4] mt-0.5">
                     {p.arch} • <span className="font-mono">{p.format}</span>
                   </p>

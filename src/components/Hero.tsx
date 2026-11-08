@@ -9,7 +9,7 @@ import {
   Monitor,
   Globe,
 } from 'lucide-react';
-import { detectUserOS, getDownloadLinks, CURRENT_RELEASE_VERSION } from '../utils/releaseLinks';
+import { detectUserOS, useLatestRelease } from '../utils/releaseLinks';
 
 interface HeroProps {
   onPlatformSelect: (platform: string) => void;
@@ -17,7 +17,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onPlatformSelect }) => {
   const userOS = detectUserOS();
-  const links = getDownloadLinks();
+  const links = useLatestRelease();
 
   const getPrimaryAction = () => {
     switch (userOS) {
@@ -67,10 +67,12 @@ export const Hero: React.FC<HeroProps> = ({ onPlatformSelect }) => {
         {/* Release Announcement Badge */}
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#EAE2D2]/80 dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#2A3E52] text-[#263950] dark:text-[#CBD8E3] shadow-2xs animate-in fade-in duration-300">
           <Sparkles size={13} className="text-amber-600 dark:text-amber-400" />
-          <span>Release {CURRENT_RELEASE_VERSION} is out</span>
+          <span>Release {links.version} is out</span>
           <span className="text-[#818992] dark:text-[#6E8092]">•</span>
           <a
-            href="#platforms"
+            href={links.releasePageUrl || '#platforms'}
+            target={links.releasePageUrl ? '_blank' : undefined}
+            rel={links.releasePageUrl ? 'noopener noreferrer' : undefined}
             className="hover:underline font-semibold text-[#263950] dark:text-[#7EAAD0]"
           >
             See all builds ↗
