@@ -82,17 +82,18 @@ export const Features: React.FC = () => {
             </p>
           </div>
 
-          {/* Bento Card 4: Seamless Checklists */}
+          {/* Bento Card 4: Apple-Inspired Checklists */}
           <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
               <CheckCircle2 size={22} />
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-[#263950] dark:text-[#E8EEF3]">
-              Apple-Style Checklists
+              Apple-Inspired Checklists
             </h3>
             <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
-              Circular task items with instant strike-through. On mobile, tapping checkboxes toggles
-              state cleanly without unwanted keyboard popups or viewport jumping.
+              Inspired by Apple Notes—because they make genuinely great software, but keep it
+              all to themselves. We brought that same tactile, circular checklist experience to
+              everywhere you actually work: macOS, Windows, Android, and Web.
             </p>
           </div>
 
