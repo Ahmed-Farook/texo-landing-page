@@ -3,10 +3,10 @@ import {
   Zap,
   Lock,
   Palette,
-  Apple,
   Trash2,
   WifiOff,
 } from 'lucide-react';
+import { AppleLogo } from './Icons';
 
 export const Features: React.FC = () => {
   return (
@@ -85,7 +85,7 @@ export const Features: React.FC = () => {
           {/* Bento Card 4: Apple-Inspired */}
           <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-              <Apple size={22} />
+              <AppleLogo size={22} />
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-[#263950] dark:text-[#E8EEF3]">
               Apple-Inspired

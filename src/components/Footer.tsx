@@ -45,14 +45,6 @@ export const Footer: React.FC = () => {
             MIT License
           </a>
           <a
-            href="https://github.com/Ahmed-Farook/notes-app#code-signing-policy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#263950] dark:hover:text-[#E8EEF3] transition-colors"
-          >
-            Code Signing Policy
-          </a>
-          <a
             href="#security"
             className="hover:text-[#263950] dark:hover:text-[#E8EEF3] transition-colors"
           >

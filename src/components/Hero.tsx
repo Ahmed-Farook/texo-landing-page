@@ -4,11 +4,11 @@ import {
   ShieldCheck,
   Zap,
   Sparkles,
-  Apple,
   Smartphone,
   Monitor,
   Globe,
 } from 'lucide-react';
+import { AppleLogo } from './Icons';
 import { detectUserOS, useLatestRelease } from '../utils/releaseLinks';
 
 interface HeroProps {
@@ -26,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({ onPlatformSelect }) => {
           label: 'Download for macOS',
           sublabel: 'Apple Silicon (M1/M2/M3/M4) • .dmg',
           url: links.macDmgUrl,
-          icon: Apple,
+          icon: AppleLogo,
         };
       case 'windows':
         return {
@@ -132,7 +132,7 @@ export const Hero: React.FC<HeroProps> = ({ onPlatformSelect }) => {
             onClick={() => onPlatformSelect('mac')}
             className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-[#EAE2D2]/60 dark:bg-[#1C2733]/60 hover:bg-[#EAE2D2] dark:hover:bg-[#25394C] border border-[#E6E0D5]/70 dark:border-[#2A3E52] transition-colors"
           >
-            <Apple size={12} />
+            <AppleLogo size={13} />
             <span>macOS</span>
           </button>
           <button

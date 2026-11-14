@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  Apple,
   Monitor,
   Smartphone,
   Globe,
   Download,
   ExternalLink,
-  ShieldCheck,
 } from 'lucide-react';
+import { AppleLogo } from './Icons';
 import { useLatestRelease } from '../utils/releaseLinks';
 
 interface PlatformCardsProps {
@@ -23,7 +22,7 @@ export const PlatformCards: React.FC<PlatformCardsProps> = ({ id = 'platforms' }
       arch: 'Apple Silicon & Intel',
       format: '.dmg',
       tag: 'Desktop',
-      icon: Apple,
+      icon: AppleLogo,
       url: links.macDmgUrl,
       requirements: 'macOS Monterey (12.0) or later',
       badge: 'Native Electron',
@@ -140,46 +139,6 @@ export const PlatformCards: React.FC<PlatformCardsProps> = ({ id = 'platforms' }
             </div>
           );
         })}
-      </div>
-
-      {/* SignPath Code Signing Attribution & GitHub Releases */}
-      <div className="rounded-2xl sm:rounded-3xl border border-[#E6E0D5] dark:border-[#223344] bg-[#FAF6EF]/80 dark:bg-[#16202A]/90 px-5 py-4 sm:px-6 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-[#4C627E] dark:text-[#8AA0B4] shadow-2xs">
-        <div className="flex items-center space-x-3 text-center sm:text-left">
-          <div className="hidden sm:flex w-9 h-9 rounded-xl bg-[#EAE2D2] dark:bg-[#203448] text-[#263950] dark:text-[#7EAAD0] items-center justify-center shrink-0">
-            <ShieldCheck size={18} />
-          </div>
-          <p className="leading-relaxed">
-            Free Windows code signing provided by{' '}
-            <a
-              href="https://signpath.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-[#263950] dark:text-[#7EAAD0] underline underline-offset-4 decoration-[#263950]/40 dark:decoration-[#7EAAD0]/40 hover:decoration-current transition-colors"
-            >
-              SignPath.io
-            </a>
-            , using a certificate by{' '}
-            <a
-              href="https://signpath.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-[#263950] dark:text-[#7EAAD0] underline underline-offset-4 decoration-[#263950]/40 dark:decoration-[#7EAAD0]/40 hover:decoration-current transition-colors"
-            >
-              SignPath Foundation
-            </a>
-            .
-          </p>
-        </div>
-
-        <a
-          href="https://github.com/Ahmed-Farook/notes-app/releases/latest"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shrink-0 inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#263950] dark:text-[#E8EEF3] bg-[#EAE2D2]/80 dark:bg-[#1C2733] hover:bg-[#DFD6C4] dark:hover:bg-[#25394C] border border-[#E6E0D5] dark:border-[#2A3E52] transition-colors"
-        >
-          <span>GitHub Releases</span>
-          <ExternalLink size={13} className="opacity-70" />
-        </a>
       </div>
     </section>
   );
