@@ -7,6 +7,7 @@ import {
   Search,
   PanelLeft,
   Sun,
+  Moon,
   Cloud,
   SquarePen,
   Check,
@@ -34,9 +35,10 @@ import {
 
 interface AppMockupProps {
   isDark?: boolean;
+  onToggleTheme?: () => void;
 }
 
-export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
+export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false, onToggleTheme }) => {
   // Mobile view tab: on small screens, users can flip between Note list and Editor
   const [mobileTab, setMobileTab] = useState<'editor' | 'list'>('editor');
 
@@ -258,12 +260,18 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
               </div>
 
-              <div
+              <button
+                type="button"
+                onClick={onToggleTheme}
                 title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                className="p-1 sm:p-1.5 rounded cursor-default"
+                className="p-1 sm:p-1.5 rounded hover:opacity-80 transition-opacity"
               >
-                <Sun size={16} className="text-amber-400" />
-              </div>
+                {isDark ? (
+                  <Sun size={16} className="text-amber-400" />
+                ) : (
+                  <Moon size={16} className="text-[#5A6D7E]" />
+                )}
+              </button>
 
               <div className={`h-4 w-px mx-1 ${isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'}`} />
 
@@ -522,7 +530,7 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                     <h4 className="font-semibold text-xs text-white truncate pr-2">
                       Welcome to texō
                     </h4>
-                    <Pin size={12} className="rotate-45 fill-white text-white shrink-0" />
+                    <Pin size={15} className="fill-white text-white shrink-0" />
                   </div>
                   <p className="text-[11px] text-white/75 truncate leading-relaxed">
                     10:24 PM We&apos;re so glad you&apos;re here! This is ...
