@@ -7,7 +7,6 @@ import {
   Search,
   PanelLeft,
   Sun,
-  Moon,
   Cloud,
   SquarePen,
   Check,
@@ -20,16 +19,17 @@ import {
   Undo2,
   Redo2,
   LayoutGrid,
-  ArrowDownToLine,
   Underline,
-  Type,
   PenTool,
   Highlighter,
   Table,
-  Image as ImageIcon,
   Share2,
   Download,
   Lock,
+  Upload,
+  Keyboard,
+  ImagePlus,
+  CheckSquare,
 } from 'lucide-react';
 
 interface AppMockupProps {
@@ -206,82 +206,79 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
               </span>
             </div>
 
-            {/* Right Controls: Share, Export, Lock, Updates tray, Cloud sync, Theme icon, New Note button */}
-            <div className="flex items-center space-x-1.5 sm:space-x-2">
+            {/* Right Controls matching texō app: Import, Export, Share, Lock, Cloud Sync, Theme, New Note */}
+            <div className="flex items-center space-x-1 sm:space-x-1.5">
               <button
                 type="button"
-                title="Share Note (Public read-only link)"
-                className={`hidden lg:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
+                title="Import Notes (.txt, .md, .zip)"
+                className={`p-1 sm:p-1.5 rounded hover:opacity-80 transition-opacity ${
                   isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                 }`}
               >
-                <Share2 size={14} />
+                <Upload size={16} />
               </button>
 
               <button
                 type="button"
                 title="Export Note (PDF, Markdown, HTML, TXT)"
-                className={`hidden lg:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
+                className={`p-1 sm:p-1.5 rounded hover:opacity-80 transition-opacity ${
                   isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                 }`}
               >
-                <Download size={14} />
+                <Download size={16} />
               </button>
 
               <button
                 type="button"
-                title="Lock Note (Password Protected)"
-                className={`hidden lg:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
+                title="Share read-only public web link"
+                className={`p-1 sm:p-1.5 rounded hover:opacity-80 transition-opacity ${
                   isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                 }`}
               >
-                <Lock size={14} />
+                <Share2 size={16} />
               </button>
 
               <button
                 type="button"
-                title="Software Updates"
-                className={`hidden sm:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
+                title="Lock note with password"
+                className={`p-1 sm:p-1.5 rounded hover:opacity-80 transition-opacity ${
                   isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                 }`}
               >
-                <ArrowDownToLine size={15} />
+                <Lock size={16} />
               </button>
 
-              <button
-                type="button"
-                title="Cloud Sync"
-                className={`hidden sm:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
-                  isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
-                }`}
-              >
-                <Cloud size={15} />
-              </button>
-
-              {/* App Theme Icon (inert display mirroring site theme) */}
               <div
-                title={isDark ? 'Dark Theme' : 'Light Theme'}
-                className={`p-1.5 rounded-lg border transition-all select-none ${
-                  isDark
-                    ? 'border-[#263747] bg-[#1C2733] text-amber-400'
-                    : 'border-[#DFD3C0] bg-[#FAF5EF] text-[#213A50]'
+                title="Cloud Sync Active (E2EE) • Status: Synced"
+                className={`flex items-center space-x-1 p-1 sm:p-1.5 rounded cursor-default ${
+                  isDark ? 'text-emerald-400' : 'text-emerald-600'
                 }`}
               >
-                {isDark ? <Sun size={14} /> : <Moon size={14} />}
+                <Cloud size={16} />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
               </div>
+
+              <div
+                title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                className="p-1 sm:p-1.5 rounded cursor-default"
+              >
+                <Sun size={16} className="text-amber-400" />
+              </div>
+
+              <div className={`h-4 w-px mx-1 ${isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'}`} />
 
               {/* New Note Button */}
               <button
                 type="button"
-                title="New Note"
-                className={`inline-flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1 rounded-md text-xs font-semibold text-white shadow-xs transition-opacity ${
+                title="New Note (Cmd/Ctrl + N)"
+                className={`inline-flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold text-white shadow-xs transition-opacity ${
                   isDark
-                    ? 'bg-[#2A3E56] hover:bg-[#344D6A]'
+                    ? 'bg-[#253D56] hover:bg-[#2C4A68]'
                     : 'bg-[#213A50] hover:bg-[#1B2C40]'
                 }`}
               >
-                <SquarePen size={13} />
-                <span className="hidden md:inline">New Note</span>
+                <SquarePen size={14} />
+                <span>New Note</span>
               </button>
             </div>
           </div>
@@ -551,9 +548,9 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                     : 'bg-[#F3EDE1] border-[#DFD3C0]'
                 }`}
               >
-                {/* Mode Switch: Text vs Draw Mode */}
+                {/* 1. Mode Switch: Type vs Draw */}
                 <div
-                  className={`flex items-center p-0.5 rounded border text-[11px] shrink-0 mr-0.5 ${
+                  className={`flex items-center p-0.5 rounded-lg border text-xs shrink-0 ${
                     isDark
                       ? 'border-[#263747] bg-[#101822]'
                       : 'border-[#DFD3C0] bg-[#FAF5EF]'
@@ -562,156 +559,190 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                   <button
                     type="button"
                     title="Type Mode"
-                    className={`p-1 rounded ${
-                      isDark ? 'bg-[#223344] text-[#E8EEF3]' : 'bg-[#E5DCCB] text-[#213A50]'
+                    className={`flex items-center space-x-1 px-2 py-0.5 rounded font-semibold text-xs ${
+                      isDark ? 'bg-[#25394C] text-[#E8EEF3]' : 'bg-[#E5DCCB] text-[#213A50]'
                     }`}
                   >
-                    <Type size={12} />
+                    <Keyboard size={13} />
+                    <span>Type</span>
                   </button>
                   <button
                     type="button"
                     title="Draw Mode (Stylus & Canvas)"
-                    className={`p-1 rounded hover:opacity-80 ${
+                    className={`flex items-center space-x-1 px-2 py-0.5 rounded font-semibold text-xs hover:opacity-80 ${
                       isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                     }`}
                   >
-                    <PenTool size={12} />
+                    <PenTool size={13} />
+                    <span>Draw</span>
                   </button>
                 </div>
 
                 <div
-                  className={`h-3 w-px mx-0.5 shrink-0 ${
+                  className={`h-3.5 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
 
-                {/* Headings */}
+                {/* 2. Undo & Redo (Positioned right after Type & Draw) */}
+                <Undo2
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
+                />
+                <Redo2
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
+                />
+
+                <div
+                  className={`h-3.5 w-px mx-0.5 shrink-0 ${
+                    isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
+                  }`}
+                />
+
+                {/* 3. Headings: H1, H2, H3 */}
                 <span
-                  className={`font-semibold text-[11px] px-1 shrink-0 ${
+                  className={`font-semibold text-xs px-1 shrink-0 cursor-pointer hover:opacity-80 ${
                     isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
-                  H1
+                  H<sub className="text-[9px]">1</sub>
                 </span>
                 <span
-                  className={`font-semibold text-[11px] px-1 shrink-0 ${
+                  className={`font-semibold text-xs px-1 shrink-0 cursor-pointer hover:opacity-80 ${
                     isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
-                  H2
+                  H<sub className="text-[9px]">2</sub>
                 </span>
                 <span
-                  className={`font-semibold text-[11px] px-1 shrink-0 ${
+                  className={`font-semibold text-xs px-1 shrink-0 cursor-pointer hover:opacity-80 ${
                     isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
-                  H3
+                  H<sub className="text-[9px]">3</sub>
                 </span>
 
                 <div
-                  className={`h-3 w-px mx-0.5 shrink-0 ${
+                  className={`h-3.5 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
 
-                {/* Text Styles */}
+                {/* 4. Text Styles: B, I, U, S, Highlighter */}
                 <span
-                  className={`font-bold text-[11px] px-1 shrink-0 ${
+                  className={`font-bold text-xs px-1 shrink-0 cursor-pointer hover:opacity-80 ${
                     isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
                   B
                 </span>
                 <span
-                  className={`italic font-serif text-[11px] px-1 shrink-0 ${
+                  className={`italic font-serif text-xs px-1 shrink-0 cursor-pointer hover:opacity-80 ${
                     isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
                   I
                 </span>
                 <Underline
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
                 />
                 <span
-                  className={`line-through text-[11px] px-1 shrink-0 ${
+                  className={`line-through text-xs px-1 shrink-0 cursor-pointer hover:opacity-80 ${
                     isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
                 >
                   S
                 </span>
                 <Highlighter
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
                 />
 
                 <div
-                  className={`h-3 w-px mx-0.5 shrink-0 ${
+                  className={`h-3.5 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
 
-                {/* Lists */}
-                <ListTodo
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                {/* 5. Lists: Checklist, Bullet List, Numbered List */}
+                <CheckSquare
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
                 />
                 <List
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
                 />
                 <ListOrdered
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
                 />
 
                 <div
-                  className={`h-3 w-px mx-0.5 shrink-0 ${
+                  className={`h-3.5 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
 
-                {/* Blocks & Inserts */}
-                <div
-                  className={`p-1 rounded text-xs shrink-0 ${
-                    isDark
-                      ? 'bg-[#203448] text-[#7EAAD0]'
-                      : 'bg-[#E5DCCB] text-[#213A50]'
+                {/* 6. Quotes, Code, Divider */}
+                <Quote
+                  size={13}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
                   }`}
-                >
-                  <Quote size={12} />
-                </div>
+                />
                 <Code
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
-                />
-                <Table
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
-                />
-                <ImageIcon
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
                 />
                 <Minus
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                  size={14}
+                  className={`shrink-0 cursor-pointer hover:opacity-80 ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
                 />
 
                 <div
-                  className={`h-3 w-px mx-0.5 shrink-0 ${
+                  className={`h-3.5 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
 
-                <Undo2
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
-                />
-                <Redo2
-                  size={13}
-                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
-                />
+                {/* 7. Photo & Table with labels */}
+                <div
+                  className={`flex items-center space-x-1 px-1 shrink-0 cursor-pointer hover:opacity-80 text-xs ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
+                >
+                  <ImagePlus size={14} />
+                  <span>Photo</span>
+                </div>
+                <div
+                  className={`flex items-center space-x-1 px-1 shrink-0 cursor-pointer hover:opacity-80 text-xs ${
+                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                  }`}
+                >
+                  <Table size={14} />
+                  <span>Table</span>
+                </div>
               </div>
 
               {/* Note Content Area */}
