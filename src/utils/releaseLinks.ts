@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-export const GITHUB_REPO = 'Ahmed-Farook/notes-app';
-export const CURRENT_RELEASE_VERSION = 'v0.2.25';
+export const GITHUB_REPO = 'Ahmed-Farook/texo';
+export const CURRENT_RELEASE_VERSION = 'v0.2.67';
 
 export type UserPlatform = 'mac' | 'windows' | 'android' | 'web';
 
@@ -24,7 +24,7 @@ export const getDownloadLinks = (tag: string = CURRENT_RELEASE_VERSION): Downloa
     macDmgUrl: `${baseUrl}/texo-${versionNum}-arm64.dmg`,
     winExeUrl: `${baseUrl}/texo-Setup-${versionNum}.exe`,
     androidApkUrl: `${baseUrl}/texo-${versionNum}.apk`,
-    webAppUrl: 'https://notes-app-nu-neon.vercel.app/',
+    webAppUrl: 'https://texo-notes.vercel.app',
     releasePageUrl: `https://github.com/${GITHUB_REPO}/releases/latest`,
   };
 };
@@ -124,7 +124,7 @@ export const fetchLatestRelease = async (): Promise<DownloadInfo> => {
       macDmgUrl,
       winExeUrl,
       androidApkUrl,
-      webAppUrl: 'https://notes-app-nu-neon.vercel.app/',
+      webAppUrl: 'https://texo-notes.vercel.app',
       releasePageUrl: (data.html_url as string) || `https://github.com/${GITHUB_REPO}/releases/latest`,
     };
 

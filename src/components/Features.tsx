@@ -5,6 +5,9 @@ import {
   Palette,
   Trash2,
   WifiOff,
+  PenTool,
+  ListTodo,
+  Table,
 } from 'lucide-react';
 import { AppleLogo } from './Icons';
 
@@ -67,7 +70,46 @@ export const Features: React.FC = () => {
             </p>
           </div>
 
-          {/* Bento Card 3: Parchment & Indigo Palette */}
+          {/* Bento Card 3: Freehand Drawing & Stylus */}
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
+            <div className="w-10 h-10 rounded-2xl bg-violet-500/10 text-violet-600 dark:text-violet-400 flex items-center justify-center">
+              <PenTool size={22} />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[#263950] dark:text-[#E8EEF3]">
+              Freehand Drawing &amp; Stylus
+            </h3>
+            <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
+              Switch seamlessly to pen mode with customizable stroke widths, color palette, and eraser. Perfect for Apple Pencil, S-Pen, or quick mouse sketches.
+            </p>
+          </div>
+
+          {/* Bento Card 4: Dedicated Checklists & Mobile Widgets */}
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
+            <div className="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <ListTodo size={22} />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[#263950] dark:text-[#E8EEF3]">
+              Checklists &amp; Widgets
+            </h3>
+            <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
+              Create distraction-free checklist files where completed tasks auto-sort to the bottom. Add the interactive scrollable widget directly to your Android home screen.
+            </p>
+          </div>
+
+          {/* Bento Card 5: Tables & Rich Formatting */}
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
+            <div className="w-10 h-10 rounded-2xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+              <Table size={22} />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-[#263950] dark:text-[#E8EEF3]">
+              Tables &amp; Rich Blocks
+            </h3>
+            <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
+              Structured tables with dynamic row and column editing, syntax-highlighted code blocks, blockquotes, horizontal dividers, and LaTeX math formatting.
+            </p>
+          </div>
+
+          {/* Bento Card 6: Parchment & Indigo Palette */}
           <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
               <Palette size={22} />
@@ -82,7 +124,7 @@ export const Features: React.FC = () => {
             </p>
           </div>
 
-          {/* Bento Card 4: Apple-Inspired */}
+          {/* Bento Card 7: Apple-Inspired */}
           <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
               <AppleLogo size={22} />
@@ -92,12 +134,12 @@ export const Features: React.FC = () => {
             </h3>
             <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
               Apple makes great stuff, but keeps it to themselves. We brought that familiar,
-              clean design to every platform you use.
+              clean tactile experience to macOS, Windows, Android, and Web.
             </p>
           </div>
 
-          {/* Bento Card 5: Soft Delete */}
-          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
+          {/* Bento Card 8: Soft Delete (2 cols on md to balance grid) */}
+          <div className="md:col-span-2 p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center">
               <Trash2 size={22} />
             </div>
@@ -105,8 +147,8 @@ export const Features: React.FC = () => {
               Recently Deleted Vault
             </h3>
             <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
-              Deleted notes stay protected in your trash bin for 30 days. One-click restore or
-              permanently erase whenever you choose.
+              Deleted notes stay protected in your trash bin for 30 days with one-click restore or
+              permanent shredding whenever you choose.
             </p>
           </div>
         </div>

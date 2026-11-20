@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* GitHub Repo */}
           <a
-            href="https://github.com/Ahmed-Farook/notes-app"
+            href="https://github.com/Ahmed-Farook/texo"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-[#263950] dark:text-[#E8EEF3] bg-[#EAE2D2]/70 dark:bg-[#1C2733] hover:bg-[#DFD6C4] dark:hover:bg-[#25394C] border border-[#E6E0D5] dark:border-[#2A3E52] transition-colors"

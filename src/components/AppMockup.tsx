@@ -22,6 +22,14 @@ import {
   LayoutGrid,
   ArrowDownToLine,
   Underline,
+  Type,
+  PenTool,
+  Highlighter,
+  Table,
+  Image as ImageIcon,
+  Share2,
+  Download,
+  Lock,
 } from 'lucide-react';
 
 interface AppMockupProps {
@@ -32,9 +40,8 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
   // Mobile view tab: on small screens, users can flip between Note list and Editor
   const [mobileTab, setMobileTab] = useState<'editor' | 'list'>('editor');
 
-  // Interactive checklist state
+  // Interactive checklist state (completed items move to bottom)
   const [checklist, setChecklist] = useState([
-    { id: '1', text: 'Check off items on your to-do lists', checked: true },
     {
       id: '2',
       text: 'Create a fresh note with New Note (or press Cmd+N / Ctrl+N)',
@@ -51,12 +58,25 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
       text: 'Sign in to sync seamlessly between macOS, Windows, Android, and Web',
       checked: false,
     },
+    {
+      id: '5',
+      text: 'Switch to Pen mode to sketch or draw freehand',
+      checked: false,
+    },
+    { id: '1', text: 'Check off items on your to-do lists', checked: true },
   ]);
 
   const toggleCheck = (id: string) => {
-    setChecklist((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item))
-    );
+    setChecklist((prev) => {
+      const updated = prev.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      );
+      // Auto-sort completed tasks to the bottom of the checklist
+      return [
+        ...updated.filter((i) => !i.checked),
+        ...updated.filter((i) => i.checked),
+      ];
+    });
   };
 
   return (
@@ -186,8 +206,38 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
               </span>
             </div>
 
-            {/* Right Controls: Updates tray, Cloud sync, Theme icon (inert), New Note button */}
+            {/* Right Controls: Share, Export, Lock, Updates tray, Cloud sync, Theme icon, New Note button */}
             <div className="flex items-center space-x-1.5 sm:space-x-2">
+              <button
+                type="button"
+                title="Share Note (Public read-only link)"
+                className={`hidden lg:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
+                  isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                }`}
+              >
+                <Share2 size={14} />
+              </button>
+
+              <button
+                type="button"
+                title="Export Note (PDF, Markdown, HTML, TXT)"
+                className={`hidden lg:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
+                  isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                }`}
+              >
+                <Download size={14} />
+              </button>
+
+              <button
+                type="button"
+                title="Lock Note (Password Protected)"
+                className={`hidden lg:inline-flex p-1 rounded hover:opacity-80 transition-opacity ${
+                  isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                }`}
+              >
+                <Lock size={14} />
+              </button>
+
               <button
                 type="button"
                 title="Software Updates"
@@ -247,16 +297,16 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
               }`}
             >
               <div className="space-y-4">
-                {/* NOTES section */}
+                {/* LIBRARY section */}
                 <div>
                   <div
                     className={`px-2 pb-1 text-[10px] font-semibold tracking-wider uppercase ${
                       isDark ? 'text-[#6E8092]' : 'text-[#8A9BA8]'
                     }`}
                   >
-                    Notes
+                    Library
                   </div>
-                  <div>
+                  <div className="space-y-0.5">
                     {/* Active Notes Folder with count: 1 */}
                     <div
                       className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md font-medium text-xs shadow-xs text-white ${
@@ -268,6 +318,30 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                         <span className="truncate">Notes</span>
                       </div>
                       <span className="text-[11px] font-mono text-white/80">1</span>
+                    </div>
+
+                    {/* Dedicated Checklists Folder */}
+                    <div
+                      className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors ${
+                        isDark
+                          ? 'text-[#CBD8E3] hover:bg-[#16222E]'
+                          : 'text-[#2B3E4F] hover:bg-[#E5DCCB]'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-2 truncate">
+                        <ListTodo
+                          size={14}
+                          className={isDark ? 'text-[#6E8092]' : 'text-[#5A6D7E]'}
+                        />
+                        <span className="truncate">Checklists</span>
+                      </div>
+                      <span
+                        className={`text-[11px] font-mono ${
+                          isDark ? 'text-[#6E8092]' : 'text-[#8A9BA8]'
+                        }`}
+                      >
+                        1
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -449,7 +523,7 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                 >
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-semibold text-xs text-white truncate pr-2">
-                      Welcome to notes-app
+                      Welcome to texō
                     </h4>
                     <Pin size={12} className="rotate-45 fill-white text-white shrink-0" />
                   </div>
@@ -477,6 +551,40 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                     : 'bg-[#F3EDE1] border-[#DFD3C0]'
                 }`}
               >
+                {/* Mode Switch: Text vs Draw Mode */}
+                <div
+                  className={`flex items-center p-0.5 rounded border text-[11px] shrink-0 mr-0.5 ${
+                    isDark
+                      ? 'border-[#263747] bg-[#101822]'
+                      : 'border-[#DFD3C0] bg-[#FAF5EF]'
+                  }`}
+                >
+                  <button
+                    type="button"
+                    title="Type Mode"
+                    className={`p-1 rounded ${
+                      isDark ? 'bg-[#223344] text-[#E8EEF3]' : 'bg-[#E5DCCB] text-[#213A50]'
+                    }`}
+                  >
+                    <Type size={12} />
+                  </button>
+                  <button
+                    type="button"
+                    title="Draw Mode (Stylus & Canvas)"
+                    className={`p-1 rounded hover:opacity-80 ${
+                      isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
+                    }`}
+                  >
+                    <PenTool size={12} />
+                  </button>
+                </div>
+
+                <div
+                  className={`h-3 w-px mx-0.5 shrink-0 ${
+                    isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
+                  }`}
+                />
+
                 {/* Headings */}
                 <span
                   className={`font-semibold text-[11px] px-1 shrink-0 ${
@@ -501,7 +609,7 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                 </span>
 
                 <div
-                  className={`h-3 w-px mx-1 shrink-0 ${
+                  className={`h-3 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
@@ -532,16 +640,13 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                 >
                   S
                 </span>
-                <span
-                  className={`font-mono text-[11px] px-1 shrink-0 ${
-                    isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'
-                  }`}
-                >
-                  &amp;
-                </span>
+                <Highlighter
+                  size={13}
+                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                />
 
                 <div
-                  className={`h-3 w-px mx-1 shrink-0 ${
+                  className={`h-3 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
@@ -561,12 +666,12 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                 />
 
                 <div
-                  className={`h-3 w-px mx-1 shrink-0 ${
+                  className={`h-3 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
 
-                {/* Active Quote Button */}
+                {/* Blocks & Inserts */}
                 <div
                   className={`p-1 rounded text-xs shrink-0 ${
                     isDark
@@ -580,13 +685,21 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                   size={13}
                   className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
                 />
+                <Table
+                  size={13}
+                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                />
+                <ImageIcon
+                  size={13}
+                  className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
+                />
                 <Minus
                   size={13}
                   className={`shrink-0 ${isDark ? 'text-[#8AA0B4]' : 'text-[#5A6D7E]'}`}
                 />
 
                 <div
-                  className={`h-3 w-px mx-1 shrink-0 ${
+                  className={`h-3 w-px mx-0.5 shrink-0 ${
                     isDark ? 'bg-[#263747]' : 'bg-[#DFD3C0]'
                   }`}
                 />
@@ -620,7 +733,7 @@ export const AppMockup: React.FC<AppMockupProps> = ({ isDark = false }) => {
                     isDark ? 'text-[#E8EEF3]' : 'text-[#1C2B36]'
                   }`}
                 >
-                  Welcome to notes-app 👋
+                  Welcome to texō 👋
                 </h1>
 
                 {/* Paragraph 1 */}

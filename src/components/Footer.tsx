@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
             <strong className="font-semibold text-[#263950] dark:text-[#E8EEF3]">texō</strong> is
             free, open-source software licensed under the{' '}
             <a
-              href="https://github.com/Ahmed-Farook/notes-app/blob/main/LICENSE"
+              href="https://github.com/Ahmed-Farook/texo/blob/main/LICENSE"
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-4 hover:text-[#263950] dark:hover:text-[#E8EEF3] transition-colors"
@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
         {/* Repository, License & Policy Links */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           <a
-            href="https://github.com/Ahmed-Farook/notes-app"
+            href="https://github.com/Ahmed-Farook/texo"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#263950] dark:hover:text-[#E8EEF3] flex items-center space-x-1.5 transition-colors"
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
             <span>GitHub Repository</span>
           </a>
           <a
-            href="https://github.com/Ahmed-Farook/notes-app/blob/main/LICENSE"
+            href="https://github.com/Ahmed-Farook/texo/blob/main/LICENSE"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#263950] dark:hover:text-[#E8EEF3] transition-colors"
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
             Privacy Policy
           </a>
           <a
-            href="https://github.com/Ahmed-Farook/notes-app/releases/latest"
+            href="https://github.com/Ahmed-Farook/texo/releases/latest"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#263950] dark:hover:text-[#E8EEF3] transition-colors"
