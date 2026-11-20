@@ -93,15 +93,7 @@ export const SecuritySection: React.FC = () => {
               <code className="font-mono text-[11px]">.md</code>,{' '}
               <code className="font-mono text-[11px]">.txt</code>,{' '}
               <code className="font-mono text-[11px]">.html</code>, or bulk{' '}
-              <code className="font-mono text-[11px]">.zip</code> format, or contact the maintainer
-              (Ahmed Farook &mdash;{' '}
-              <a
-                href="mailto:ahmedfarook470@gmail.com"
-                className="font-semibold text-[#263950] dark:text-[#7EAAD0] underline underline-offset-4 hover:opacity-80 transition-opacity"
-              >
-                ahmedfarook470@gmail.com
-              </a>
-              ) for account deletion inquiries.
+              <code className="font-mono text-[11px]">.zip</code> format. You can also permanently delete your account and all associated cloud data directly from the app at any time.
             </p>
           </div>
         </div>

@@ -92,7 +92,7 @@ export const Features: React.FC = () => {
               Checklists &amp; Widgets
             </h3>
             <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
-              Create distraction-free checklist files where completed tasks auto-sort to the bottom. Add the interactive scrollable widget directly to your Android home screen.
+              Create distraction-free checklist files where completed tasks auto-sort to the bottom. Add the interactive widget directly to your Android home screen.
             </p>
           </div>
 
@@ -138,8 +138,8 @@ export const Features: React.FC = () => {
             </p>
           </div>
 
-          {/* Bento Card 8: Soft Delete (2 cols on md to balance grid) */}
-          <div className="md:col-span-2 p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
+          {/* Bento Card 8: Soft Delete (Placed to the right of Apple-Inspired to complete the 3x3 grid) */}
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#FAF6EF] dark:bg-[#1C2733] border border-[#E6E0D5] dark:border-[#223344] shadow-soft space-y-4">
             <div className="w-10 h-10 rounded-2xl bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center">
               <Trash2 size={22} />
             </div>
@@ -147,7 +147,7 @@ export const Features: React.FC = () => {
               Recently Deleted Vault
             </h3>
             <p className="text-sm text-[#4C627E] dark:text-[#8AA0B4] leading-relaxed">
-              Deleted notes stay protected in your trash bin for 30 days with one-click restore or
+              Deleted notes stay protected in your trash bin for 7 days with one-click restore or
               permanent shredding whenever you choose.
             </p>
           </div>
