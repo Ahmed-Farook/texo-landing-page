@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const GITHUB_REPO = 'Ahmed-Farook/texo';
-export const CURRENT_RELEASE_VERSION = 'v0.2.78';
+export const CURRENT_RELEASE_VERSION = 'v0.2.79';
 
 export type UserPlatform = 'mac' | 'windows' | 'android' | 'web';
 
